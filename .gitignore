@@ -1,0 +1,86 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Environment
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+.env.staging
+.venv
+venv/
+env/
+ENV/
+.conda/
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# IDE
+.vscode/
+.vscode-test/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+
+# Firebase
+firebase-debug.log
+.firebase/
+firebaseKey.json
+*firebase-adminsdk*.json
+serviceAccountKey.json
+
+# OS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+Thumbs.db
+
+# Python Testing & Coverage
+.pytest_cache/
+.tox/
+.coverage
+.coverage.*
+htmlcov/
+coverage/
+.hypothesis/
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.auth/
+
+# Package Manager Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Yarn 2+
+.pnp/
+.pnp.js
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache
+
+# Temporary files
+*.tmp
+*.log
