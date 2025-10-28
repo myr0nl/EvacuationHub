@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <!-- Favicons for all browsers and devices (PNG format prioritized for production compatibility) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="%PUBLIC_URL%/favicon-48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="%PUBLIC_URL%/logo512.png" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon-32.png" type="image/png" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
+    <meta name="theme-color" content="#1e40af" />
+    <meta
+      name="description"
+      content="DisasterScope - See the full scope of disasters. Navigate to safety. Track 8 trusted data sources in real-time."
+    />
+
+    <!-- PWA Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="DisasterScope" />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <!-- PWA Icons -->
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="%PUBLIC_URL%/icons/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="%PUBLIC_URL%/icons/icon-512.png" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <!-- Google Fonts: Atkinson Hyperlegible - Optimized for accessibility and emergency contexts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+    <title>DisasterScope - Track Disasters. Find Safety.</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+
+    <!-- Service Worker Registration -->
+    <script>
+      // Register service worker in production only
+      if ('serviceWorker' in navigator && '%NODE_ENV%' === 'production') {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker
+            .register('/service-worker.js')
+            .then((registration) => {
+              console.log('[PWA] Service Worker registered successfully:', registration.scope);
+
+              // Check for updates periodically
+              setInterval(() => {
+                registration.update();
+              }, 60 * 60 * 1000); // Check every hour
+
+              // Handle service worker updates
+              registration.addEventListener('updatefound', () => {
+                const newWorker = registration.installing;
+
+                newWorker.addEventListener('statechange', () => {
+                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    // New service worker available, prompt user to refresh
+                    if (confirm('New version available! Reload to update?')) {
+                      newWorker.postMessage({ type: 'SKIP_WAITING' });
+                      window.location.reload();
+                    }
+                  }
+                });
+              });
+            })
+            .catch((error) => {
+              console.error('[PWA] Service Worker registration failed:', error);
+            });
+
+          // Handle controller change (new service worker activated)
+          navigator.serviceWorker.addEventListener('controllerchange', () => {
+            console.log('[PWA] Service Worker controller changed, reloading...');
+            window.location.reload();
+          });
+        });
+      }
+
+      // Handle offline/online status
+      window.addEventListener('online', () => {
+        console.log('[PWA] Connection restored, syncing data...');
+        if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+          // Trigger background sync if available
+          navigator.serviceWorker.ready.then((registration) => {
+            if ('sync' in registration) {
+              registration.sync.register('sync-disaster-data');
+            }
+          });
+        }
+      });
+
+      window.addEventListener('offline', () => {
+        console.log('[PWA] Connection lost, using cached data...');
+      });
+    </script>
+  </body>
+</html>

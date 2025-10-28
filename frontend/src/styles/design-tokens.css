@@ -1,0 +1,354 @@
+/**
+ * Design Tokens - Disaster Alert System
+ * Mobile-First Responsive Design System (2025 Best Practices)
+ *
+ * This file defines the foundational design tokens used throughout the application.
+ * All values are based on the Mobile UI Design Specification and WCAG 2.1 Level AA standards.
+ *
+ * RESPONSIVE STRATEGY:
+ * - Fluid spacing using clamp() for seamless scaling
+ * - Standardized breakpoints for consistent behavior
+ * - Viewport-relative units for flexible layouts
+ * - Works on ANY screen size from 240px to 4K (3840px)
+ */
+
+:root {
+  /* ===== RESPONSIVE BREAKPOINTS ===== */
+  --breakpoint-xs: 320px;   /* Small phones (iPhone SE 1st gen) */
+  --breakpoint-sm: 480px;   /* Standard phones */
+  --breakpoint-md: 768px;   /* Tablets */
+  --breakpoint-lg: 1024px;  /* Desktop */
+  --breakpoint-xl: 1280px;  /* Large desktop */
+  --breakpoint-2xl: 1920px; /* Full HD */
+
+  /* ===== FLUID SPACING SCALE (Responsive using clamp()) ===== */
+  /* Scales smoothly from mobile (320px) to desktop (1920px) */
+  --space-xs: clamp(4px, 0.25vw + 3px, 6px);        /* 4-6px */
+  --space-sm: clamp(8px, 0.5vw + 6px, 12px);        /* 8-12px */
+  --space-md: clamp(12px, 1vw + 8px, 16px);         /* 12-16px */
+  --space-lg: clamp(16px, 1.5vw + 11px, 24px);      /* 16-24px */
+  --space-xl: clamp(24px, 2vw + 16px, 32px);        /* 24-32px */
+  --space-2xl: clamp(32px, 3vw + 20px, 48px);       /* 32-48px */
+  --space-3xl: clamp(48px, 4vw + 32px, 64px);       /* 48-64px */
+
+  /* ===== TOUCH TARGETS ===== */
+  --touch-min: 44px;    /* WCAG 2.5.5 minimum (44x44px) */
+  --touch-comfortable: 48px;  /* Comfortable touch target */
+  --touch-large: 56px;  /* Primary actions, FABs */
+
+  /* ===== BORDER RADIUS ===== */
+  --radius-xs: 4px;     /* Subtle rounding */
+  --radius-sm: 8px;     /* Standard buttons, inputs */
+  --radius-md: 12px;    /* Cards, panels */
+  --radius-lg: 16px;    /* Modal dialogs, sheets */
+  --radius-xl: 24px;    /* Large panels */
+  --radius-full: 9999px; /* Pills, circular buttons */
+
+  /* ===== SHADOWS (Elevation) ===== */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+
+  /* ===== TRANSITIONS ===== */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* ===== Z-INDEX SCALE ===== */
+  --z-base: 0;
+  --z-dropdown: 1000;
+  --z-sticky: 1100;
+  --z-fixed: 1200;
+  --z-modal-backdrop: 1300;
+  --z-modal: 1400;
+  --z-popover: 1500;
+  --z-tooltip: 1600;
+
+  /* ===== GLASSMORPHISM ===== */
+  --glass-bg: rgba(255, 255, 255, 0.95);
+  --glass-bg-dark: rgba(31, 41, 55, 0.95);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-blur: blur(20px);
+  --glass-blur-light: blur(12px);
+  --glass-blur-strong: blur(32px);
+
+  /* ===== COLOR SYSTEM ===== */
+  /* EMERGENCY RESPONSE PRO THEME - 2025 */
+  /* Based on research: OSHA safety standards, emergency app best practices */
+  /* Primary: Deep Blue (trust, authority, professionalism) */
+  /* Accents: Orange (caution), Red (danger) following safety color psychology */
+
+  /* Deep Blue (Primary) - Trust & Authority */
+  --color-primary-50: #eff6ff;   /* Blue 50 */
+  --color-primary-100: #dbeafe;  /* Blue 100 */
+  --color-primary-200: #bfdbfe;  /* Blue 200 */
+  --color-primary-300: #93c5fd;  /* Blue 300 */
+  --color-primary-400: #60a5fa;  /* Blue 400 */
+  --color-primary-500: #1e40af;  /* Brand primary - Deep Blue 700 */
+  --color-primary-600: #1e3a8a;  /* Blue 800 */
+  --color-primary-700: #1e3a8a;  /* Blue 800 */
+  --color-primary-800: #1e293b;  /* Slate 800 */
+  --color-primary-900: #0f172a;  /* Slate 900 */
+
+  /* Orange Accent (Warning/Caution) - OSHA Standard */
+  --color-orange-50: #fff7ed;    /* Orange 50 */
+  --color-orange-100: #ffedd5;   /* Orange 100 */
+  --color-orange-200: #fed7aa;   /* Orange 200 */
+  --color-orange-300: #fdba74;   /* Orange 300 */
+  --color-orange-400: #fb923c;   /* Orange 400 */
+  --color-orange-500: #f97316;   /* Vivid Orange 500 */
+  --color-orange-600: #ea580c;   /* Orange 600 */
+  --color-orange-700: #c2410c;   /* Orange 700 */
+  --color-orange-800: #9a3412;   /* Orange 800 */
+  --color-orange-900: #7c2d12;   /* Orange 900 */
+
+  /* Severity Colors */
+  --color-critical: #dc2626;      /* Red 600 */
+  --color-critical-bg: #fef2f2;   /* Red 50 */
+  --color-high: #f59e0b;          /* Amber 500 */
+  --color-high-bg: #fffbeb;       /* Amber 50 */
+  --color-medium: #eab308;        /* Yellow 500 */
+  --color-medium-bg: #fefce8;     /* Yellow 50 */
+  --color-low: #3b82f6;           /* Blue 500 */
+  --color-low-bg: #eff6ff;        /* Blue 50 */
+
+  /* Neutrals */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+  /* Semantic Colors - Emergency Response Theme */
+  --color-success: #10b981;           /* Green 500 - Safe zones, confirmations */
+  --color-warning: var(--color-orange-500);  /* Orange 500 - Caution, warnings */
+  --color-error: #ef4444;             /* Red 500 - Errors, critical danger */
+  --color-info: var(--color-primary-400);    /* Blue 400 - Information, guidance */
+
+  /* Text Colors */
+  --color-text-primary: var(--color-gray-900);
+  --color-text-secondary: var(--color-gray-600);
+  --color-text-tertiary: var(--color-gray-500);
+  --color-text-inverse: white;
+
+  /* Border Colors */
+  --color-border-light: rgba(229, 231, 235, 0.8);
+  --color-border-medium: rgba(209, 213, 219, 0.8);
+  --color-border-dark: rgba(156, 163, 175, 0.8);
+
+  /* ===== TYPOGRAPHY ===== */
+
+  /* Font Families */
+  --font-sans: 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+               'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono',
+               'Courier New', monospace;
+
+  /* Fluid Font Sizes (Responsive using clamp()) */
+  /* Scales smoothly from mobile to desktop for optimal readability */
+  --text-xs: clamp(11px, 0.6vw + 9px, 12px);     /* 11-12px */
+  --text-sm: clamp(13px, 0.8vw + 10px, 14px);    /* 13-14px */
+  --text-base: clamp(15px, 1vw + 12px, 16px);    /* 15-16px */
+  --text-lg: clamp(17px, 1.2vw + 13px, 18px);    /* 17-18px */
+  --text-xl: clamp(20px, 1.5vw + 15px, 22px);    /* 20-22px */
+  --text-2xl: clamp(24px, 2vw + 18px, 28px);     /* 24-28px */
+  --text-3xl: clamp(28px, 2.5vw + 20px, 32px);   /* 28-32px */
+  --text-4xl: clamp(32px, 3vw + 24px, 40px);     /* 32-40px */
+
+  /* Font Weights */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+
+  /* Line Heights */
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+
+  /* Letter Spacing */
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+
+  /* ===== SAFE AREA INSETS (iOS Notch/Dynamic Island) ===== */
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-left: env(safe-area-inset-left, 0px);
+  --safe-area-right: env(safe-area-inset-right, 0px);
+
+  /* ===== FOCUS INDICATORS ===== */
+  --focus-ring-width: 3px;
+  --focus-ring-offset: 2px;
+  --focus-ring-color: var(--color-primary-500);
+}
+
+/* ===== ADAPTIVE SPACING (Viewport-Based) ===== */
+
+@media (max-width: 320px) {
+  :root {
+    --space-adaptive: var(--space-sm);  /* 8px */
+    --space-section: var(--space-lg);   /* 16px */
+  }
+}
+
+@media (min-width: 321px) and (max-width: 375px) {
+  :root {
+    --space-adaptive: var(--space-md);  /* 12px */
+    --space-section: var(--space-xl);   /* 24px */
+  }
+}
+
+@media (min-width: 376px) {
+  :root {
+    --space-adaptive: var(--space-lg);  /* 16px */
+    --space-section: var(--space-2xl);  /* 32px */
+  }
+}
+
+/* ===== DARK MODE SUPPORT ===== */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --glass-bg: rgba(31, 41, 55, 0.95);
+    --glass-border: rgba(75, 85, 99, 0.5);
+
+    --color-text-primary: var(--color-gray-50);
+    --color-text-secondary: var(--color-gray-300);
+    --color-text-tertiary: var(--color-gray-400);
+
+    --color-border-light: rgba(75, 85, 99, 0.5);
+    --color-border-medium: rgba(107, 114, 128, 0.5);
+    --color-border-dark: rgba(156, 163, 175, 0.5);
+  }
+}
+
+/* ===== HIGH CONTRAST MODE ===== */
+
+@media (prefers-contrast: high) {
+  :root {
+    --color-text-primary: black;
+    --color-text-secondary: #1f2937;
+    --color-border-light: #4b5563;
+    --color-border-medium: #374151;
+
+    /* Increase border widths */
+    --border-width: 2px;
+
+    /* Enhance focus indicators */
+    --focus-ring-width: 4px;
+  }
+}
+
+/* ===== REDUCED MOTION ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0.01ms;
+    --transition-base: 0.01ms;
+    --transition-slow: 0.01ms;
+    --transition-bounce: 0.01ms;
+  }
+}
+
+/* ===== DYNAMIC TYPE SUPPORT (iOS) ===== */
+
+@supports (-webkit-touch-callout: none) {
+  :root {
+    /* Scales from default to largest accessibility size */
+    --text-base: clamp(15px, 1rem + 0.2vw, 20px);
+    --text-lg: clamp(17px, 1.2rem + 0.2vw, 22px);
+    --text-xl: clamp(20px, 1.5rem + 0.3vw, 26px);
+    --text-2xl: clamp(24px, 1.8rem + 0.4vw, 32px);
+  }
+}
+
+/* ===== UNIVERSAL RESPONSIVE UTILITIES ===== */
+
+/* Container Query Support - Works on ANY screen size */
+@supports (container-type: inline-size) {
+  .container-responsive {
+    container-type: inline-size;
+    container-name: responsive-container;
+  }
+
+  /* Component adapts based on available space, not viewport */
+  @container responsive-container (min-width: 400px) {
+    .responsive-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @container responsive-container (min-width: 800px) {
+    .responsive-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+/* Viewport-relative positioning for floating elements */
+.floating-element {
+  /* Automatically adjusts position based on screen size */
+  position: fixed;
+  top: clamp(75px, 10vh, 160px);
+  right: clamp(12px, 2vw, 20px);
+  z-index: var(--z-fixed);
+}
+
+/* Fluid max-widths for content containers */
+.content-container {
+  width: 100%;
+  max-width: clamp(320px, 90vw, 1280px);
+  margin-inline: auto;
+  padding-inline: var(--space-md);
+}
+
+/* Safe area aware padding */
+.safe-area-padding {
+  padding-top: max(var(--space-md), var(--safe-area-top));
+  padding-bottom: max(var(--space-md), var(--safe-area-bottom));
+  padding-left: max(var(--space-md), var(--safe-area-left));
+  padding-right: max(var(--space-md), var(--safe-area-right));
+}
+
+/* Extreme size fallbacks */
+@media (max-width: 240px) {
+  /* Galaxy Fold inner screen, very small devices */
+  :root {
+    --touch-min: 36px; /* Smaller touch targets for tiny screens */
+    --space-md: 8px;   /* Reduce spacing */
+    --text-base: 12px; /* Smaller text */
+  }
+
+  /* Hide non-essential UI elements */
+  .hide-on-tiny {
+    display: none;
+  }
+}
+
+@media (min-width: 3840px) {
+  /* 4K displays - prevent elements from becoming too large */
+  :root {
+    --space-3xl: 80px; /* Cap maximum spacing */
+    --text-4xl: 48px;  /* Cap maximum font size */
+  }
+
+  /* Maintain readable line lengths on ultra-wide screens */
+  .content-container {
+    max-width: 1600px;
+  }
+}

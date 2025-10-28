@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="2048" height="2048" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="1024" cy="1024" r="1024" fill="#1e40af"/>
+
+  <!-- Warning triangle -->
+  <path d="M 1024 512 L 1536 1433.6 L 512 1433.6 Z"
+        fill="#ffffff" stroke="#ffffff" stroke-width="12"/>
+
+  <!-- Exclamation mark -->
+  <rect x="1000" y="778.24" width="48" height="368.64" fill="#1e40af" rx="8"/>
+  <circle cx="1024" cy="1269.76" r="28" fill="#1e40af"/>
+</svg>

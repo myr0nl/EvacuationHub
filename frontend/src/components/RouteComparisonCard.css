@@ -1,0 +1,462 @@
+/* RouteComparisonCard.css - Modern, responsive styling for route comparison cards */
+
+.route-comparison-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 2px solid rgba(229, 231, 235, 0.8);
+  border-radius: 16px;
+  padding: 22px;
+  margin-bottom: 22px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.route-comparison-card:hover {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+}
+
+/* Highlighted borders for special routes */
+.route-comparison-card.fastest {
+  border-color: #3B82F6;
+  background: linear-gradient(135deg, rgba(239, 246, 255, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.route-comparison-card.safest {
+  border-color: #10b981;
+  background: linear-gradient(135deg, rgba(240, 253, 244, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Selected route card */
+.route-comparison-card.selected {
+  border-color: #3B82F6;
+  border-width: 3px;
+  background: linear-gradient(135deg, rgba(239, 246, 255, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 28px rgba(20, 184, 166, 0.3);
+}
+
+/* Header Section */
+.route-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.route-title-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.route-color-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  cursor: help;
+  transition: transform 0.2s ease;
+}
+
+.route-color-indicator:hover {
+  transform: scale(1.2);
+}
+
+.route-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+}
+
+.route-badges {
+  display: flex;
+  gap: 8px;
+}
+
+.badge {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge-fastest {
+  background: #3B82F6;
+  color: white;
+}
+
+.badge-safest {
+  background: #10b981;
+  color: white;
+}
+
+/* Metrics Grid */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.metric {
+  text-align: center;
+  padding: 12px;
+  background: #f9fafb;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.metric:hover {
+  background: #f3f4f6;
+}
+
+.metric-icon {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+
+.metric-label {
+  font-size: 0.75rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.metric-value {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+/* Safety Details Section */
+.safety-details {
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.safety-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.safety-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.safety-score-text {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+/* Progress Bars */
+.progress-bar-container {
+  width: 100%;
+  height: 10px;
+  background: #e5e7eb;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.5s ease, background 0.3s ease;
+}
+
+.progress-bar-green {
+  background: linear-gradient(to right, #10b981, #34d399);
+}
+
+.progress-bar-orange {
+  background: linear-gradient(to right, #f59e0b, #fbbf24);
+}
+
+.progress-bar-red {
+  background: linear-gradient(to right, #ef4444, #f87171);
+}
+
+.progress-bar-heatmap {
+  background: linear-gradient(to right, #3B82F6, #60a5fa);
+}
+
+/* Warning and Info Messages */
+.warning-message {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-top: 8px;
+  border-left: 3px solid #f59e0b;
+}
+
+.info-message {
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  margin-top: 8px;
+  border-left: 3px solid #3B82F6;
+}
+
+.distance-info {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* ETA Display */
+.eta-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #f0f9ff;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #bfdbfe;
+}
+
+.eta-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1e40af;
+}
+
+.eta-time {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1e3a8a;
+}
+
+/* Heatmap Section */
+.heatmap-section {
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.heatmap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.heatmap-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #4b5563;
+  flex-shrink: 0;
+}
+
+.heatmap-score-text {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+/* Select Button */
+.select-button {
+  width: 100%;
+  padding: 16px 26px;
+  background: linear-gradient(135deg, #3B82F6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(20, 184, 166, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.select-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.select-button:hover::before {
+  left: 100%;
+}
+
+.select-button:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  box-shadow: 0 6px 20px rgba(20, 184, 166, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.select-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 16px rgba(20, 184, 166, 0.3);
+}
+
+.select-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.3);
+}
+
+/* Selected button state */
+.select-button.selected {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.select-button.selected:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .route-comparison-card {
+    padding: 16px;
+  }
+
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .route-title {
+    font-size: 1.25rem;
+  }
+
+  .route-badges {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    padding: 3px 10px;
+  }
+
+  .metric-value {
+    font-size: 1rem;
+  }
+
+  .eta-display {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .select-button {
+    padding: 12px 20px;
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .route-comparison-card {
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+
+  .metrics-grid {
+    gap: 8px;
+  }
+
+  .metric {
+    padding: 8px;
+  }
+
+  .metric-icon {
+    font-size: 1.25rem;
+  }
+
+  .metric-label {
+    font-size: 0.7rem;
+  }
+
+  .metric-value {
+    font-size: 0.9375rem;
+  }
+
+  .safety-details,
+  .heatmap-section {
+    padding: 12px;
+  }
+
+  .select-button {
+    padding: 10px 16px;
+  }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  .route-comparison-card,
+  .metric,
+  .progress-bar,
+  .select-button {
+    transition: none;
+  }
+
+  .route-comparison-card:hover {
+    transform: none;
+  }
+
+  .select-button:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .route-comparison-card {
+    border-width: 3px;
+  }
+
+  .badge {
+    border: 2px solid currentColor;
+  }
+
+  .select-button {
+    border: 2px solid white;
+  }
+}

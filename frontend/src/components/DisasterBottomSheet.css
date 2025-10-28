@@ -1,0 +1,130 @@
+/* Disaster Bottom Sheet Styles */
+
+.disaster-bottom-sheet-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: white;
+  border-radius: 16px 16px 0 0;
+}
+
+.disaster-bottom-sheet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.disaster-bottom-sheet-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+  line-height: 1.4;
+  flex: 1;
+  padding-right: 16px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.disaster-bottom-sheet-close {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.disaster-bottom-sheet-close:hover {
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.disaster-bottom-sheet-close:active {
+  background-color: #e5e7eb;
+  transform: scale(0.95);
+}
+
+.disaster-bottom-sheet-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+  -webkit-overflow-scrolling: touch;
+}
+
+.disaster-field {
+  margin-bottom: 16px;
+}
+
+.disaster-field:last-child {
+  margin-bottom: 0;
+}
+
+.disaster-field strong {
+  display: block;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.disaster-field p {
+  margin: 0;
+  color: #1f2937;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+/* Scrollbar styling for webkit browsers */
+.disaster-bottom-sheet-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.disaster-bottom-sheet-body::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 4px;
+}
+
+.disaster-bottom-sheet-body::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+.disaster-bottom-sheet-body::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .disaster-bottom-sheet-title {
+    font-size: 1rem;
+  }
+
+  .disaster-bottom-sheet-header {
+    padding: 12px 16px;
+  }
+
+  .disaster-bottom-sheet-body {
+    padding: 16px;
+  }
+
+  .disaster-field strong {
+    font-size: 0.8125rem;
+  }
+
+  .disaster-field p {
+    font-size: 0.875rem;
+  }
+}

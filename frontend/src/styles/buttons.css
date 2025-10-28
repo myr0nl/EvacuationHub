@@ -1,0 +1,504 @@
+/**
+ * Unified Button System
+ *
+ * Provides consistent button sizing, spacing, and visual hierarchy across the application.
+ * Based on WCAG 2.1 touch target minimum of 44x44px for accessibility.
+ *
+ * Size Scale:
+ * - Primary Actions: 56px min-height (Report Disaster, Find Safe Route)
+ * - Secondary Actions: 48px min-height (Settings, Modal buttons)
+ * - Icon Buttons: 48x48px (Alert bell, Dismiss, Close)
+ * - Tertiary/Small: 44px min-height (FAB badge, small utility buttons)
+ *
+ * Mobile Strategy: Maintain or increase sizes (never decrease below 44px)
+ */
+
+/* ===========================
+   PRIMARY ACTION BUTTONS
+   =========================== */
+
+/**
+ * Primary buttons - Most important user actions
+ * Usage: Report Disaster, Find Safe Route, main CTAs
+ * Size: 56px min-height
+ * Font: 16px (maintains readability on all devices)
+ */
+.btn-primary {
+  min-height: 56px;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-primary:focus-visible {
+  outline: 3px solid rgba(30, 64, 175, 0.5);
+  outline-offset: 3px;
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Primary button variants */
+.btn-primary.btn-light {
+  background: rgba(255, 255, 255, 0.95);
+  color: #1e40af;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-primary.btn-light:hover:not(:disabled) {
+  background: white;
+}
+
+.btn-primary.btn-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.btn-primary.btn-success:hover:not(:disabled) {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+.btn-primary.btn-success:disabled {
+  background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+}
+
+.btn-primary.btn-purple {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: white;
+}
+
+.btn-primary.btn-purple:hover:not(:disabled) {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+}
+
+/* ===========================
+   SECONDARY ACTION BUTTONS
+   =========================== */
+
+/**
+ * Secondary buttons - Important but not primary actions
+ * Usage: Settings, Cancel, Close modals, secondary CTAs
+ * Size: 48px min-height
+ * Font: 15px
+ */
+.btn-secondary {
+  min-height: 40px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-secondary.btn-light {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.btn-secondary.btn-light:hover:not(:disabled) {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.btn-secondary.btn-outline {
+  background: white;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.btn-secondary.btn-outline:hover:not(:disabled) {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.btn-secondary.btn-success {
+  background: #10b981;
+  color: white;
+  border: none;
+}
+
+.btn-secondary.btn-success:hover:not(:disabled) {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+}
+
+.btn-secondary.btn-teal {
+  background: #14b8a6;
+  color: white;
+  border: none;
+}
+
+.btn-secondary.btn-teal:hover:not(:disabled) {
+  background: #0d9488;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(20, 184, 166, 0.3);
+}
+
+.btn-secondary:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn-secondary:focus-visible {
+  outline: 3px solid #14b8a6;
+  outline-offset: 2px;
+}
+
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===========================
+   ICON BUTTONS
+   =========================== */
+
+/**
+ * Icon buttons - Square buttons with icons only
+ * Usage: Alert bell, close buttons, dismiss buttons
+ * Size: 48x48px (maintains WCAG minimum)
+ * Font: 20px (icon size)
+ */
+.btn-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 0;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-icon.btn-light {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.btn-icon.btn-light:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(1.05);
+}
+
+.btn-icon.btn-gray {
+  background: rgba(243, 244, 246, 0.8);
+  border: 1px solid rgba(209, 213, 219, 0.5);
+  color: #6b7280;
+}
+
+.btn-icon.btn-gray:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.9);
+  color: white;
+  border-color: rgba(220, 38, 38, 0.5);
+  transform: scale(1.05);
+}
+
+.btn-icon.btn-close {
+  background: none;
+  border: none;
+  color: #6b7280;
+}
+
+.btn-icon.btn-close:hover:not(:disabled) {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.btn-icon:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.btn-icon:focus-visible {
+  outline: 3px solid #14b8a6;
+  outline-offset: 2px;
+}
+
+/* ===========================
+   ICON BUTTON LARGE (FAB)
+   =========================== */
+
+/**
+ * Large icon buttons - Floating Action Buttons
+ * Usage: Mobile filter FAB, Alert notification bell
+ * Size: 56x56px (larger for prominence)
+ * Font: 28px (icon size)
+ */
+.btn-icon-lg {
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  min-height: 56px;
+  padding: 0;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-icon-lg.btn-success {
+  background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+  color: white;
+}
+
+.btn-icon-lg.btn-success:hover:not(:disabled) {
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(30, 64, 175, 0.4);
+}
+
+.btn-icon-lg:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.btn-icon-lg:focus-visible {
+  outline: 3px solid #1e40af;
+  outline-offset: 4px;
+}
+
+/* ===========================
+   FULL-WIDTH BUTTONS
+   =========================== */
+
+/**
+ * Full-width buttons - Spans container width
+ * Usage: Modal CTAs, mobile layouts
+ * Size: 48px min-height (comfortable tap target)
+ */
+.btn-full-width {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-full-width.btn-success {
+  background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.4);
+}
+
+.btn-full-width.btn-success:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 64, 175, 0.5);
+}
+
+.btn-full-width.btn-teal {
+  background: #14b8a6;
+  color: white;
+  border: none;
+}
+
+.btn-full-width.btn-teal:hover:not(:disabled) {
+  background: #0d9488;
+}
+
+.btn-full-width.btn-light {
+  background: rgba(239, 246, 255, 0.8);
+  color: #2563eb;
+  border: 1px solid rgba(20, 184, 166, 0.3);
+}
+
+.btn-full-width.btn-light:hover:not(:disabled) {
+  background: rgba(219, 234, 254, 0.9);
+  border-color: rgba(20, 184, 166, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-full-width:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-full-width:focus-visible {
+  outline: 3px solid #14b8a6;
+  outline-offset: 2px;
+}
+
+.btn-full-width:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===========================
+   MOBILE RESPONSIVE
+   =========================== */
+
+/**
+ * Mobile adjustments - INCREASE sizes, never decrease
+ * Ensures comfortable touch targets on small screens
+ */
+@media (max-width: 768px) {
+  /* Primary buttons maintain size */
+  .btn-primary {
+    min-height: 56px;
+    font-size: 16px;
+    padding: 16px 24px;
+  }
+
+  /* Secondary buttons maintain smaller size */
+  .btn-secondary {
+    min-height: 40px;
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  /* Icon buttons maintain size */
+  .btn-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    font-size: 20px;
+  }
+
+  /* Large icon buttons maintain size */
+  .btn-icon-lg {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    min-height: 56px;
+    font-size: 28px;
+  }
+
+  /* Full-width buttons increase slightly for comfort */
+  .btn-full-width {
+    min-height: 48px;
+    padding: 14px 20px;
+    font-size: 15px;
+  }
+}
+
+/* Small mobile devices (320px-360px) */
+@media (max-width: 360px) {
+  /* Reduce padding slightly but maintain min-height */
+  .btn-primary {
+    padding: 14px 20px;
+  }
+
+  .btn-secondary {
+    padding: 8px 14px;
+  }
+
+  /* Icon buttons remain same size (touch targets) */
+  .btn-icon,
+  .btn-icon-lg {
+    /* No change - maintain WCAG minimums */
+  }
+}
+
+/* ===========================
+   ACCESSIBILITY
+   =========================== */
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .btn-primary,
+  .btn-secondary,
+  .btn-icon,
+  .btn-icon-lg,
+  .btn-full-width {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary,
+  .btn-secondary,
+  .btn-icon,
+  .btn-icon-lg,
+  .btn-full-width {
+    transition: none;
+    animation: none;
+  }
+
+  .btn-primary::before {
+    display: none;
+  }
+
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .btn-icon:hover,
+  .btn-icon-lg:hover,
+  .btn-full-width:hover {
+    transform: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .btn-primary,
+  .btn-secondary,
+  .btn-icon,
+  .btn-icon-lg,
+  .btn-full-width {
+    box-shadow: none;
+    background: white;
+    color: black;
+    border: 1px solid black;
+  }
+}

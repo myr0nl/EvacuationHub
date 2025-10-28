@@ -1,0 +1,302 @@
+/* NavigationInstructions.css - Turn-by-turn navigation directions styling */
+
+.navigation-instructions {
+  margin-top: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+/* Header */
+.instructions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.instructions-header:hover {
+  background-color: #f3f4f6;
+}
+
+.instructions-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.instructions-icon {
+  font-size: 1.25rem;
+}
+
+.instructions-title h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.instructions-count {
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.toggle-button {
+  background: none;
+  border: none;
+  font-size: 0.875rem;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: color 0.2s ease;
+}
+
+.toggle-button:hover {
+  color: #3b82f6;
+}
+
+/* Summary stats */
+.instructions-summary {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.75rem 1rem;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 0.85rem;
+}
+
+.summary-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+/* Instructions list */
+.instructions-list {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 0.5rem 0;
+}
+
+/* Scrollbar styling */
+.instructions-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.instructions-list::-webkit-scrollbar-track {
+  background: #f9fafb;
+}
+
+.instructions-list::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+.instructions-list::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Individual instruction item */
+.instruction-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #f3f4f6;
+  transition: background-color 0.2s ease;
+}
+
+.instruction-item:last-child {
+  border-bottom: none;
+}
+
+.instruction-item:hover {
+  background-color: #f9fafb;
+}
+
+/* Step number */
+.instruction-step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #3b82f6;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Instruction icon */
+.instruction-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  font-size: 1.5rem;
+  color: #1f2937;
+}
+
+/* Instruction content */
+.instruction-content {
+  flex: 1;
+  min-width: 0; /* Allow text truncation */
+}
+
+.instruction-text {
+  font-size: 0.9rem;
+  color: #1f2937;
+  line-height: 1.5;
+  margin-bottom: 0.25rem;
+}
+
+.instruction-details {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.detail-distance,
+.detail-duration {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.detail-distance::before {
+  content: '📏';
+  font-size: 0.85rem;
+}
+
+.detail-duration::before {
+  content: '⏱';
+  font-size: 0.85rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .instructions-header {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .instructions-title h4 {
+    font-size: 0.875rem;
+  }
+
+  .instructions-count {
+    font-size: 0.75rem;
+  }
+
+  .instruction-item {
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .instruction-step-number {
+    min-width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
+  }
+
+  .instruction-icon {
+    min-width: 28px;
+    height: 28px;
+    font-size: 1.25rem;
+  }
+
+  .instruction-text {
+    font-size: 0.85rem;
+  }
+
+  .instruction-details {
+    font-size: 0.75rem;
+  }
+}
+
+/* Dark mode support (optional) */
+@media (prefers-color-scheme: dark) {
+  .navigation-instructions {
+    border-color: #374151;
+    background-color: #1f2937;
+  }
+
+  .instructions-header {
+    background-color: #111827;
+    border-bottom-color: #374151;
+  }
+
+  .instructions-header:hover {
+    background-color: #1f2937;
+  }
+
+  .instructions-title h4 {
+    color: #f9fafb;
+  }
+
+  .instructions-count {
+    color: #9ca3af;
+  }
+
+  .toggle-button {
+    color: #9ca3af;
+  }
+
+  .toggle-button:hover {
+    color: #60a5fa;
+  }
+
+  .instructions-summary {
+    background-color: #111827;
+    border-bottom-color: #374151;
+  }
+
+  .summary-item {
+    color: #d1d5db;
+  }
+
+  .instructions-list::-webkit-scrollbar-track {
+    background: #111827;
+  }
+
+  .instructions-list::-webkit-scrollbar-thumb {
+    background: #4b5563;
+  }
+
+  .instructions-list::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+  }
+
+  .instruction-item {
+    border-bottom-color: #374151;
+  }
+
+  .instruction-item:hover {
+    background-color: #111827;
+  }
+
+  .instruction-icon {
+    color: #f9fafb;
+  }
+
+  .instruction-text {
+    color: #f9fafb;
+  }
+
+  .instruction-details {
+    color: #9ca3af;
+  }
+}

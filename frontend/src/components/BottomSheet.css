@@ -1,0 +1,186 @@
+/* Google Maps-style Bottom Sheet Component */
+
+.bottom-sheet-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0);
+  pointer-events: none;
+  transition: background-color 0.3s ease;
+  z-index: 999;
+}
+
+.bottom-sheet-backdrop.visible {
+  background-color: rgba(0, 0, 0, 0.4);
+  pointer-events: auto;
+}
+
+.bottom-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bottom-sheet.dragging {
+  transition: none; /* Disable animation while dragging */
+}
+
+/* Drag Handle Area */
+.bottom-sheet-drag-handle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 0 8px 0;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.bottom-sheet-drag-handle:active {
+  cursor: grabbing;
+}
+
+.drag-indicator {
+  width: 36px;
+  height: 4px;
+  background-color: #d1d5db;
+  border-radius: 2px;
+  transition: background-color 0.2s ease;
+}
+
+.bottom-sheet:hover .drag-indicator,
+.bottom-sheet.dragging .drag-indicator {
+  background-color: #9ca3af;
+}
+
+/* Sheet Content Container */
+.bottom-sheet-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 0;
+}
+
+/* Prevent scrolling when collapsed (only drag handle visible) */
+.bottom-sheet.collapsed .bottom-sheet-content {
+  overflow-y: hidden;
+}
+
+/* State-specific styles */
+.bottom-sheet.collapsed {
+  height: 180px;
+}
+
+.bottom-sheet.anchor {
+  height: 50vh;
+}
+
+.bottom-sheet.expanded {
+  height: 80vh;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .bottom-sheet {
+    background: #1f2937;
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .drag-indicator {
+    background-color: #4b5563;
+  }
+
+  .bottom-sheet:hover .drag-indicator,
+  .bottom-sheet.dragging .drag-indicator {
+    background-color: #6b7280;
+  }
+
+  .bottom-sheet-backdrop.visible {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Tablet & Desktop - Hide bottom sheet pattern, use default positioning */
+@media (min-width: 769px) {
+  .bottom-sheet-backdrop {
+    display: none;
+  }
+
+  .bottom-sheet {
+    position: relative;
+    border-radius: 0;
+    box-shadow: none;
+    height: auto !important;
+    transition: none;
+  }
+
+  .bottom-sheet-drag-handle {
+    display: none; /* No drag handle on desktop */
+  }
+
+  .bottom-sheet-content {
+    overflow-y: visible;
+  }
+}
+
+/* Extra Small Mobile (<480px) */
+@media (max-width: 480px) {
+  .bottom-sheet.collapsed {
+    height: 160px;
+  }
+
+  .bottom-sheet.anchor {
+    height: 55vh; /* Slightly more height on small screens */
+  }
+
+  .bottom-sheet.expanded {
+    height: 85vh;
+  }
+}
+
+/* Accessibility - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .bottom-sheet {
+    transition: none;
+  }
+
+  .drag-indicator {
+    transition: none;
+  }
+
+  .bottom-sheet-backdrop {
+    transition: none;
+  }
+}
+
+/* Scrollbar Styling (Mobile) */
+.bottom-sheet-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.bottom-sheet-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.bottom-sheet-content::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .bottom-sheet-content::-webkit-scrollbar-thumb {
+    background: #4b5563;
+  }
+}

@@ -1,0 +1,442 @@
+/* ====================
+   User Location Marker
+   ==================== */
+
+.user-location-marker {
+  background: transparent;
+  border: none;
+}
+
+.user-location-pulse {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(20, 184, 166, 0.3);
+  animation: pulse 2s infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-location-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #14b8a6;
+  border: 2px solid white;
+  box-shadow: 0 0 10px rgba(20, 184, 166, 0.8);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* User location popup styling */
+.user-location-popup {
+  text-align: center;
+}
+
+.user-location-popup strong {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.user-location-popup .coordinates {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin: 0;
+  font-family: monospace;
+}
+
+/* ==========================
+   Proximity Range Control Panel
+   ========================== */
+
+.proximity-range-control {
+  position: absolute;
+  bottom: 100px;
+  left: 10px;
+  z-index: 1000;
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  min-width: 250px;
+  max-width: 300px;
+  transition: all 0.3s ease;
+  pointer-events: auto; /* Ensure panel captures all pointer events */
+}
+
+.proximity-range-control.collapsed {
+  min-width: auto;
+  padding: 10px;
+}
+
+/* Control header */
+.control-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.control-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.control-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  line-height: 1;
+}
+
+.icon-button:hover {
+  background-color: #f3f4f6;
+}
+
+.icon-button:active {
+  background-color: #e5e7eb;
+}
+
+/* Control content */
+.control-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Radius display */
+.radius-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background-color: #f9fafb;
+  border-radius: 6px;
+}
+
+.radius-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.radius-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+/* Range slider */
+.range-slider {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(to right, #10b981, #eab308, #f59e0b, #dc2626);
+  outline: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #14b8a6;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.range-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #14b8a6;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.range-slider::-moz-range-thumb:hover {
+  transform: scale(1.15);
+}
+
+/* Range labels */
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-top: -5px;
+}
+
+/* Alert count */
+.alert-count {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 10px 12px;
+  background-color: #eff6ff;
+  border-radius: 6px;
+  border-left: 3px solid #14b8a6;
+}
+
+.alert-count-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e40af;
+  line-height: 1;
+}
+
+.alert-count-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* Severity breakdown */
+.severity-breakdown {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.severity-badge {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+}
+
+.severity-badge.critical {
+  background-color: #fecaca;
+  color: #991b1b;
+  border: 1px solid #dc2626;
+}
+
+.severity-badge.high {
+  background-color: #fed7aa;
+  color: #9a3412;
+  border: 1px solid #f59e0b;
+}
+
+.severity-badge.medium {
+  background-color: #fef08a;
+  color: #854d0e;
+  border: 1px solid #eab308;
+}
+
+.severity-badge.low {
+  background-color: #d1fae5;
+  color: #065f46;
+  border: 1px solid #10b981;
+}
+
+/* Safe zone indicator */
+.safe-zone {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background-color: #d1fae5;
+  border-radius: 6px;
+  border-left: 3px solid #10b981;
+}
+
+.safe-icon {
+  font-size: 1.25rem;
+  color: #065f46;
+  font-weight: bold;
+}
+
+.safe-text {
+  font-size: 0.875rem;
+  color: #065f46;
+  font-weight: 500;
+}
+
+/* ====================
+   Responsive Design
+   ==================== */
+
+/* Tablet and smaller */
+@media (max-width: 768px) {
+  .proximity-range-control {
+    bottom: 80px;
+    min-width: 220px;
+    max-width: 260px;
+    padding: 12px;
+  }
+
+  .control-title {
+    font-size: 0.9rem;
+  }
+
+  .radius-display {
+    padding: 6px 10px;
+  }
+
+  .alert-count {
+    padding: 8px 10px;
+  }
+
+  .severity-breakdown {
+    gap: 5px;
+  }
+
+  .severity-badge {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 640px) {
+  .proximity-range-control {
+    bottom: 60px;
+    left: 5px;
+    min-width: 200px;
+    max-width: 240px;
+    padding: 10px;
+  }
+
+  .proximity-range-control.collapsed {
+    padding: 8px;
+  }
+
+  .control-title {
+    font-size: 0.85rem;
+  }
+
+  .icon-button {
+    font-size: 0.9rem;
+    padding: 3px;
+  }
+
+  .radius-value {
+    font-size: 0.9rem;
+  }
+
+  .alert-count-number {
+    font-size: 1.25rem;
+  }
+
+  .alert-count-label {
+    font-size: 0.8rem;
+  }
+
+  .safe-text {
+    font-size: 0.8rem;
+  }
+
+  /* Make slider more touch-friendly */
+  .range-slider {
+    height: 8px;
+  }
+
+  .range-slider::-webkit-slider-thumb {
+    width: 22px;
+    height: 22px;
+  }
+
+  .range-slider::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* Very small screens - hide on very small devices */
+@media (max-width: 400px) {
+  .proximity-range-control {
+    min-width: 180px;
+    max-width: 200px;
+    font-size: 0.8rem;
+  }
+
+  .severity-breakdown {
+    flex-direction: column;
+  }
+}
+
+/* ====================
+   Accessibility
+   ==================== */
+
+/* Focus styles for keyboard navigation */
+.icon-button:focus,
+.range-slider:focus {
+  outline: 2px solid #14b8a6;
+  outline-offset: 2px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .user-location-pulse {
+    animation: none;
+  }
+
+  .proximity-range-control {
+    transition: none;
+  }
+
+  .icon-button {
+    transition: none;
+  }
+
+  .range-slider::-webkit-slider-thumb,
+  .range-slider::-moz-range-thumb {
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .proximity-range-control {
+    border: 2px solid #000;
+  }
+
+  .severity-badge {
+    border-width: 2px;
+  }
+
+  .user-location-dot {
+    border-width: 3px;
+  }
+}

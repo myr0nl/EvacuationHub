@@ -1,0 +1,1031 @@
+/* Prevent page scrolling only on main app (not on auth pages) */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body:has(.App) {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+#root:has(.App) {
+  overflow: hidden;
+}
+
+/* App Container */
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Modern Header with Glassmorphism - Emergency Response Pro 2025 */
+.app-header {
+  position: relative;
+  background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);  /* Deep Blue to Navy */
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 20px rgba(30, 64, 175, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  z-index: 10001; /* Must be higher than header toggle button (9999) and dropdown (10000) */
+  transition: box-shadow 0.3s ease;
+}
+
+.app-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+}
+
+.app-header:hover {
+  box-shadow: 0 6px 24px rgba(30, 64, 175, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.header-left,
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.brand-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.app-header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.app-header h1:hover {
+  transform: scale(1.02);
+}
+
+/* Brand icon (search magnifying glass) */
+.brand-icon {
+  margin-right: 8px;
+  vertical-align: middle;
+  color: #60a5fa; /* Light blue for better visibility on dark header */
+  flex-shrink: 0;
+}
+
+.hero-tagline {
+  font-size: 0.875rem;
+  font-weight: 400;
+  margin: 0;
+  opacity: 0.95;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
+}
+
+/* User Menu */
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+}
+
+/* User Menu Dropdown Container */
+.user-menu-dropdown {
+  position: relative;
+  z-index: 10000; /* Must be higher than header toggle button (9999) */
+}
+
+/* User Menu Button */
+.user-menu-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 24px;
+  color: white;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  min-height: 48px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.user-menu-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.user-menu-button:active {
+  transform: translateY(0);
+}
+
+.user-menu-button:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-arrow {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  transition: transform 0.2s ease;
+}
+
+/* Dropdown Content */
+.user-menu-dropdown-content {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.2s ease;
+  z-index: 10000; /* Must be higher than header toggle button (9999) */
+  border: 1px solid rgba(30, 64, 175, 0.2);
+  overflow: hidden;
+}
+
+.user-menu-dropdown:hover .user-menu-dropdown-content,
+.user-menu-dropdown:focus-within .user-menu-dropdown-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.user-menu-dropdown:hover .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Items */
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  color: #374151;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-size: 0.95rem;
+  font-weight: 500;
+  min-height: 48px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dropdown-item:hover {
+  background: rgba(30, 64, 175, 0.1);
+  color: #1e40af;
+}
+
+.dropdown-item.logout-item:hover {
+  background: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+}
+
+.dropdown-item:active {
+  transform: scale(0.98);
+}
+
+.dropdown-icon {
+  margin-right: 8px;
+  vertical-align: middle;
+  flex-shrink: 0;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+/* Legacy logout button class removed - now in dropdown */
+
+/* Auth Buttons - Now using unified button system */
+.auth-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.login-button,
+.register-button {
+  min-height: 48px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.login-button {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.login-button:hover {
+  background: rgba(255, 255, 255, 0.95);
+  color: #1e40af;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+.register-button {
+  background: rgba(255, 255, 255, 0.95);
+  color: #1e40af;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.register-button:hover {
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.5);
+}
+
+.login-button:active,
+.register-button:active {
+  transform: translateY(0);
+}
+
+.login-button:focus-visible,
+.register-button:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
+/* Action Buttons - Now using unified button system */
+/* Import unified button styles - classes applied in JSX:
+ * .report-button -> btn-secondary btn-light (48px height, smaller)
+ * .safe-route-button -> btn-secondary btn-success (48px height, smaller)
+ * .settings-button -> btn-icon with purple styling
+ */
+
+/* Header action buttons - using .btn-secondary for smaller size */
+.report-button {
+  /* Styles from buttons.css .btn-secondary.btn-light */
+}
+
+.safe-route-button {
+  /* Styles from buttons.css .btn-secondary.btn-success */
+}
+
+/* Additional header-specific button styles */
+.report-button.btn-secondary {
+  background: rgba(255, 255, 255, 0.95);
+  color: #1e40af;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.report-button.btn-secondary:hover:not(:disabled) {
+  background: white;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+}
+
+.safe-route-button.btn-secondary {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.safe-route-button.btn-secondary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.safe-route-button.btn-secondary:disabled {
+  background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Icon alignment for buttons */
+.btn-secondary svg,
+.btn-primary svg,
+.btn-icon svg {
+  flex-shrink: 0;
+}
+
+/* Settings Button - Icon-only with purple theme */
+.settings-button {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.settings-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.5);
+}
+
+.settings-button:focus-visible {
+  outline: 3px solid rgba(139, 92, 246, 0.5);
+  outline-offset: 2px;
+}
+
+/* Error Message with Glassmorphism */
+.error-message {
+  background: rgba(254, 226, 226, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #991b1b;
+  padding: 1rem 2rem;
+  margin: 0;
+  border-left: 4px solid #dc2626;
+  box-shadow: 0 2px 12px rgba(220, 38, 38, 0.2);
+  animation: slide-in-down 0.3s ease-out;
+  font-weight: 500;
+}
+
+/* Guest Banner with Modern Design - Emergency Response Pro 2025 */
+.guest-banner {
+  background: linear-gradient(135deg, rgba(30, 64, 175, 0.95) 0%, rgba(30, 58, 138, 0.95) 100%);  /* Deep Blue to Navy */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: white;
+  padding: 0.75rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  animation: slide-in-down 0.4s ease-out;
+}
+
+.guest-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.guest-icon {
+  font-size: 1.5rem;
+  animation: wave 2s infinite;
+  transform-origin: 70% 70%;
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  10%, 30% {
+    transform: rotate(14deg);
+  }
+  20%, 40% {
+    transform: rotate(-8deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+}
+
+.guest-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.guest-link {
+  color: #fbbf24;  /* Keep amber for contrast against blue */
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  background: rgba(251, 191, 36, 0.15);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.guest-link:hover {
+  background: rgba(251, 191, 36, 0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
+}
+
+/* App Content */
+.app-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Form Container with Glassmorphism */
+.form-container {
+  width: 420px;
+  padding: 1.5rem;
+  background: rgba(248, 249, 250, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(229, 231, 235, 0.8);
+  box-shadow: 2px 0 16px rgba(0, 0, 0, 0.05);
+  overflow-y: auto;
+  animation: slide-in-left 0.3s ease-out;
+  z-index: 50;
+}
+
+/* Map Container */
+.map-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Loading State with Modern Animation */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  font-size: 1.2rem;
+  color: #1e40af;  /* Deep Blue */
+  gap: 1rem;
+}
+
+.loading::after {
+  content: '';
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(30, 64, 175, 0.2);
+  border-top-color: #1e40af;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Footer with Glassmorphism */
+.app-footer {
+  background: rgba(248, 249, 250, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 0.75rem 2rem;
+  border-top: 1px solid rgba(229, 231, 235, 0.8);
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.03);
+  z-index: 10;
+}
+
+.app-footer p {
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Responsive Design - Tablet */
+@media (max-width: 768px) {
+  .app-content {
+    flex-direction: column;
+  }
+
+  .form-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    border-right: none;
+    border-bottom: none;
+    z-index: 1500; /* Above everything else */
+    animation: slide-in-bottom 0.3s ease-out;
+    transition: transform 0.3s ease, height 0.3s ease;
+  }
+
+  /* When location picker is active on mobile - slide form to bottom half */
+  .form-container.location-picker-active {
+    transform: translateY(50vh);
+    height: 50vh;
+    max-height: 50vh;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+  }
+
+  /* Add drag handle visual hint when form is collapsed */
+  .form-container.location-picker-active::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 4px;
+    background-color: #d1d5db;
+    border-radius: 2px;
+    z-index: 10;
+  }
+
+  .map-container {
+    flex: 1;
+    min-height: 400px; /* Ensure map has height on tablets */
+  }
+
+  .app-header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .header-left,
+  .header-right {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .app-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .user-menu {
+    width: 100%;
+  }
+
+  .user-menu-dropdown {
+    width: 100%;
+  }
+
+  .user-menu-button {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .user-menu-dropdown-content {
+    width: 100%;
+    min-width: auto;
+  }
+}
+
+/* Responsive Design - Mobile */
+@media (max-width: 480px) {
+  /* Fix for mobile: ensure map is visible */
+  .App {
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height - better for mobile browsers */
+  }
+
+  .app-content {
+    flex: 1;
+    min-height: 0; /* Allow flex children to shrink below content size */
+    overflow: hidden;
+    position: relative; /* For absolute positioned sidebar */
+  }
+
+  .map-container {
+    width: 100%; /* Full width - sidebar overlays on top */
+    height: auto; /* Auto height to respect top/bottom positioning */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 30px; /* Leave space for fixed footer */
+  }
+
+  /* Fix Leaflet container positioning on mobile */
+  .map-container .leaflet-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Hideable header on mobile */
+  .app-header {
+    padding: 0.4rem 0.75rem;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    position: relative;
+  }
+
+  .app-header.hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: -1;
+  }
+
+  /* Tab-style header toggle - dynamically positioned */
+  .header-toggle-btn {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background: rgba(30, 64, 175, 0.95);  /* Deep Blue */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0 0 6px 6px; /* Rounded on bottom only */
+    /* Small tab size - 44px width maintains touch target */
+    width: 44px;
+    height: 24px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: top 0.3s ease, background 0.2s ease, height 0.2s ease;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* When header is visible - attach to bottom of header */
+  .header-toggle-btn.header-visible {
+    /* JavaScript will set this dynamically based on header height */
+    border-top: none;
+  }
+
+  /* When header is hidden - attach to top of screen */
+  .header-toggle-btn:not(.header-visible) {
+    top: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0 0 6px 6px;
+  }
+
+  .header-toggle-btn:hover {
+    background: rgba(30, 64, 175, 1);
+    height: 28px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .header-toggle-btn:active {
+    transform: translateX(-50%) scale(0.95);
+  }
+
+  .header-toggle-btn:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 2px;
+  }
+
+  .app-header h1 {
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  .header-left,
+  .header-right {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Buttons maintain min-height 48px on mobile (WCAG compliance) */
+  .report-button,
+  .safe-route-button,
+  .location-picker-button,
+  .map-settings-button,
+  .enable-location-button {
+    min-height: 48px;
+    padding: 12px 16px;
+    font-size: 15px;
+  }
+
+  .auth-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .login-button,
+  .register-button {
+    min-height: 48px;
+    padding: 12px 16px;
+    font-size: 15px;
+  }
+
+  .logout-btn {
+    min-height: 48px;
+    padding: 12px 16px;
+    font-size: 15px;
+  }
+
+  .guest-banner {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .guest-banner-content {
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .guest-icon {
+    font-size: 1.2rem;
+  }
+
+  .error-message {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    border-left-width: 3px;
+  }
+
+  .app-footer {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.7rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    text-align: center;
+    line-height: 1.1;
+    height: 30px; /* Match the bottom spacing */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .app-footer p {
+    margin: 0;
+  }
+}
+
+/* Accessibility: High Contrast Mode */
+@media (prefers-contrast: high) {
+  .app-header,
+  .guest-banner {
+    border-bottom: 2px solid white;
+  }
+
+  .profile-link,
+  .login-button,
+  .register-button,
+  .report-button,
+  .safe-route-button,
+  .location-picker-button {
+    border-width: 2px;
+  }
+
+  .error-message {
+    border-left-width: 6px;
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .guest-icon,
+  .loading::after,
+  .location-picker-button.active {
+    animation: none;
+  }
+
+  .report-button::before,
+  .safe-route-button::before,
+  .location-picker-button::before {
+    display: none;
+  }
+
+  .app-header h1:hover,
+  .profile-link:hover,
+  .login-button:hover,
+  .register-button:hover,
+  .report-button:hover,
+  .safe-route-button:hover,
+  .location-picker-button:hover,
+  .guest-link:hover {
+    transform: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .app-header,
+  .guest-banner,
+  .form-container,
+  .app-footer {
+    background: white;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .report-button,
+  .safe-route-button,
+  .location-picker-button,
+  .logout-btn {
+    display: none;
+  }
+}
+
+
+/* Navigation Mode Styles */
+.navigation-controls {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 280px;
+  animation: slide-in-down 0.3s ease-out;
+}
+
+.nav-exit-btn {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.nav-exit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+}
+
+.nav-exit-btn:active {
+  transform: translateY(0);
+}
+
+.nav-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.nav-destination,
+.nav-distance,
+.nav-duration {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-destination:last-child,
+.nav-distance:last-child,
+.nav-duration:last-child {
+  border-bottom: none;
+}
+
+.nav-label {
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.nav-value {
+  font-size: 1rem;
+  color: #111827;
+  font-weight: 600;
+}
+
+/* Navigation Mode - Hide elements */
+.app-content.navigation-mode {
+  /* Map takes full screen */
+}
+
+.app-content.navigation-mode .map-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Mobile Navigation Controls */
+@media (max-width: 480px) {
+  .navigation-controls {
+    top: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    transform: none;
+    min-width: auto;
+    padding: 0.75rem 1rem;
+  }
+
+  .nav-exit-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .nav-label {
+    font-size: 0.8rem;
+  }
+
+  .nav-value {
+    font-size: 0.9rem;
+  }
+
+  .nav-destination,
+  .nav-distance,
+  .nav-duration {
+    padding: 0.4rem 0;
+  }
+}
+
+/* Clear Route Button */
+.clear-route-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.4);
+  transition: all 0.2s ease;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.clear-route-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+}
+
+.clear-route-btn:active {
+  transform: translateY(0);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .clear-route-btn {
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+}

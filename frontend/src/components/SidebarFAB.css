@@ -1,0 +1,116 @@
+/**
+ * Sidebar FAB Styles
+ *
+ * Floating action button for toggling desktop sidebar.
+ * Hidden on mobile (<= 768px) where sidebar doesn't exist.
+ */
+
+/* FAB Button */
+.sidebar-fab {
+  position: fixed;
+  bottom: 24px; /* Same position as mobile filter FAB */
+  left: 16px;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+  border: none;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.4),
+              0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hide FAB on mobile */
+@media (max-width: 768px) {
+  .sidebar-fab {
+    display: none !important;
+  }
+}
+
+/* FAB Icon */
+.fab-icon {
+  color: white;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover state (for devices with hover capability) */
+@media (hover: hover) and (pointer: fine) {
+  .sidebar-fab:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 16px rgba(30, 64, 175, 0.5),
+                0 3px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  .sidebar-fab:hover .fab-icon {
+    transform: rotate(15deg);
+  }
+}
+
+/* Active/pressed state */
+.sidebar-fab:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 6px rgba(30, 64, 175, 0.3),
+              0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* When sidebar is open */
+.sidebar-fab.active {
+  background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+  box-shadow: 0 2px 6px rgba(30, 64, 175, 0.3),
+              0 1px 2px rgba(0, 0, 0, 0.1);
+  left: 376px; /* Sidebar width (360px) + gap (16px) */
+}
+
+.sidebar-fab.active .fab-icon {
+  transform: rotate(180deg);
+}
+
+/* Focus visible state for keyboard navigation */
+.sidebar-fab:focus-visible {
+  outline: 3px solid #1e40af;
+  outline-offset: 4px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .sidebar-fab {
+    border: 2px solid #0f172a;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-fab,
+  .fab-icon {
+    transition: none;
+    animation: none;
+  }
+
+  .sidebar-fab:hover {
+    transform: none;
+  }
+
+  .sidebar-fab:hover .fab-icon {
+    transform: none;
+  }
+
+  .sidebar-fab.active .fab-icon {
+    transform: none;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .sidebar-fab {
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.6),
+                0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+}

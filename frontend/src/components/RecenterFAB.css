@@ -1,0 +1,95 @@
+/**
+ * Recenter FAB Styles
+ *
+ * Floating action button for recentering map on user location.
+ * Styled to match Leaflet zoom controls with white background.
+ */
+
+/* FAB Button */
+.recenter-fab {
+  position: fixed;
+  bottom: 100px; /* Moved higher up */
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #fff;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* FAB Icon */
+.recenter-fab .fab-icon {
+  color: #333;
+  transition: transform 0.2s ease;
+}
+
+/* Hover state (for devices with hover capability) */
+@media (hover: hover) and (pointer: fine) {
+  .recenter-fab:hover {
+    background: #f4f4f4;
+  }
+
+  .recenter-fab:hover .fab-icon {
+    transform: rotate(90deg);
+  }
+}
+
+/* Active/pressed state */
+.recenter-fab:active {
+  transform: scale(0.95);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Focus visible state for keyboard navigation */
+.recenter-fab:focus-visible {
+  outline: 3px solid #1e40af;
+  outline-offset: 4px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .recenter-fab {
+    border: 2px solid #0f172a;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .recenter-fab,
+  .recenter-fab .fab-icon {
+    transition: none;
+    animation: none;
+  }
+
+  .recenter-fab:hover {
+    transform: none;
+  }
+
+  .recenter-fab:hover .fab-icon {
+    transform: none;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .recenter-fab {
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.6),
+                0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Mobile adjustments - move up to avoid blocking mobile filter FAB */
+@media (max-width: 768px) {
+  .recenter-fab {
+    bottom: 110px; /* Above the mobile filter FAB */
+  }
+}

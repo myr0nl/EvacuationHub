@@ -1,0 +1,216 @@
+/**
+ * Mobile Emergency Mode Breakpoints
+ *
+ * These CSS custom properties define consistent breakpoints across the application
+ * for responsive design and mobile emergency mode features.
+ *
+ * Usage in CSS:
+ *   @media (max-width: var(--breakpoint-mobile)) {
+ *     // Mobile styles
+ *   }
+ *
+ * Usage in JavaScript:
+ *   const isMobile = window.innerWidth <= parseInt(getComputedStyle(document.documentElement)
+ *     .getPropertyValue('--breakpoint-mobile'));
+ */
+
+:root {
+  /* Breakpoint values (in pixels) */
+  --breakpoint-mobile: 640px;
+  --breakpoint-tablet: 1024px;
+  --breakpoint-desktop: 1025px;
+
+  /* Mobile Emergency Mode specific variables */
+  --emergency-mobile-max-width: 640px;
+  --emergency-tablet-max-width: 1024px;
+
+  /* Touch target sizes for mobile accessibility */
+  --touch-target-min: 44px; /* WCAG 2.1 minimum touch target size */
+  --touch-target-comfortable: 48px; /* Comfortable touch target size */
+
+  /* Mobile spacing scale */
+  --spacing-mobile-xs: 4px;
+  --spacing-mobile-sm: 8px;
+  --spacing-mobile-md: 16px;
+  --spacing-mobile-lg: 24px;
+  --spacing-mobile-xl: 32px;
+
+  /* Mobile font sizes */
+  --font-size-mobile-xs: 12px;
+  --font-size-mobile-sm: 14px;
+  --font-size-mobile-base: 16px;
+  --font-size-mobile-lg: 18px;
+  --font-size-mobile-xl: 20px;
+  --font-size-mobile-2xl: 24px;
+
+  /* Emergency mode colors */
+  --emergency-critical-bg: #dc2626;
+  --emergency-critical-text: #ffffff;
+  --emergency-high-bg: #ea580c;
+  --emergency-high-text: #ffffff;
+  --emergency-medium-bg: #f59e0b;
+  --emergency-medium-text: #000000;
+  --emergency-low-bg: #84cc16;
+  --emergency-low-text: #000000;
+
+  /* Emergency mode overlay */
+  --emergency-overlay-bg: rgba(0, 0, 0, 0.85);
+  --emergency-panel-bg: #ffffff;
+  --emergency-panel-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 -2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  /* Z-index layers for mobile emergency mode */
+  --z-index-emergency-overlay: 9000;
+  --z-index-emergency-panel: 9100;
+  --z-index-emergency-controls: 9200;
+}
+
+/**
+ * Mobile devices (≤640px)
+ */
+@media (max-width: 640px) {
+  :root {
+    /* Adjust spacing for smaller screens */
+    --spacing-mobile-md: 12px;
+    --spacing-mobile-lg: 20px;
+  }
+
+  /* Hide desktop-only elements on mobile */
+  .desktop-only {
+    display: none !important;
+  }
+
+  /* Full-width mobile containers */
+  .mobile-container {
+    width: 100%;
+    padding-left: var(--spacing-mobile-md);
+    padding-right: var(--spacing-mobile-md);
+  }
+
+  /* Mobile emergency mode full-screen layout */
+  .emergency-mode-active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+  }
+}
+
+/**
+ * Tablet devices (641px - 1024px)
+ */
+@media (min-width: 641px) and (max-width: 1024px) {
+  :root {
+    /* Tablet-specific adjustments */
+    --spacing-mobile-lg: 28px;
+    --spacing-mobile-xl: 36px;
+  }
+
+  /* Show tablet-specific elements */
+  .tablet-only {
+    display: block;
+  }
+
+  .mobile-only {
+    display: none;
+  }
+}
+
+/**
+ * Desktop devices (>1024px)
+ */
+@media (min-width: 1025px) {
+  /* Hide mobile-only elements on desktop */
+  .mobile-only,
+  .tablet-only {
+    display: none !important;
+  }
+
+  /* Desktop emergency mode should not activate */
+  .emergency-mode-active {
+    position: relative;
+  }
+}
+
+/**
+ * Landscape orientation adjustments
+ */
+@media (orientation: landscape) and (max-width: 1024px) {
+  :root {
+    /* Reduce vertical spacing in landscape */
+    --spacing-mobile-md: 12px;
+    --spacing-mobile-lg: 16px;
+  }
+
+  /* Optimize emergency panel for landscape */
+  .emergency-panel {
+    max-height: 60vh;
+  }
+}
+
+/**
+ * Portrait orientation optimizations
+ */
+@media (orientation: portrait) and (max-width: 640px) {
+  /* Emergency panel can use more vertical space */
+  .emergency-panel {
+    max-height: 75vh;
+  }
+}
+
+/**
+ * High-contrast mode support for accessibility
+ */
+@media (prefers-contrast: high) {
+  :root {
+    --emergency-critical-bg: #b91c1c;
+    --emergency-high-bg: #c2410c;
+    --emergency-medium-bg: #d97706;
+    --emergency-low-bg: #65a30d;
+  }
+}
+
+/**
+ * Reduced motion support for accessibility
+ */
+@media (prefers-reduced-motion: reduce) {
+  .emergency-panel,
+  .emergency-overlay,
+  .emergency-controls {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/**
+ * Dark mode support
+ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --emergency-panel-bg: #1f2937;
+    --emergency-overlay-bg: rgba(0, 0, 0, 0.92);
+  }
+}
+
+/**
+ * Touch device optimizations
+ */
+@media (hover: none) and (pointer: coarse) {
+  /* Ensure all interactive elements meet touch target size */
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    min-height: var(--touch-target-min);
+    min-width: var(--touch-target-min);
+  }
+
+  /* Increase tap targets in emergency mode */
+  .emergency-mode-active button {
+    min-height: var(--touch-target-comfortable);
+    min-width: var(--touch-target-comfortable);
+  }
+}

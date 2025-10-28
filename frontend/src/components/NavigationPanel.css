@@ -1,0 +1,564 @@
+/* Navigation Panel - Google Maps style turn-by-turn UI */
+.navigation-panel {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  left: auto;
+  width: 500px;
+  max-width: calc(100% - 40px);
+  background: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  z-index: 10000;
+  max-height: 70vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  /* Position in right-center quadrant:
+     right: 20px positions right edge at 20px from viewport edge
+     translateX(-25%) shifts left by 125px (25% of 500px width)
+     Final position: 145px from right edge (20px + 125px)
+     This places the panel in the right portion of the screen with comfortable spacing */
+  transform: translateX(-25%);
+}
+
+/* Mobile bottom sheet styling */
+.navigation-panel.mobile-sheet {
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+  box-shadow: none;
+  max-height: none;
+  overflow-y: visible;
+  z-index: auto;
+}
+
+/* Desktop compact toggle button - 48x48px for comfortable touch */
+.nav-compact-toggle {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 18px;
+  min-width: 48px;
+  min-height: 48px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+}
+
+.nav-compact-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Hide desktop toggle on mobile */
+@media (max-width: 768px) {
+  .nav-compact-toggle {
+    display: none;
+  }
+}
+
+/* Compact mode - minimized panel */
+.navigation-panel.compact {
+  max-height: 200px;
+}
+
+.navigation-panel.compact .nav-current-step {
+  padding: 16px 20px;
+}
+
+.navigation-panel.compact .nav-instruction-icon {
+  font-size: 36px;
+  width: 48px;
+}
+
+.navigation-panel.compact .nav-instruction-main {
+  font-size: 16px;
+}
+
+.navigation-panel.compact .nav-instruction-distance {
+  font-size: 24px;
+}
+
+/* Header with exit button */
+.nav-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  color: white;
+  gap: 12px;
+  border-radius: 12px 12px 0 0;
+}
+
+.nav-exit-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 20px;
+  min-width: 48px;
+  min-height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+}
+
+/* Focus indicator for exit button */
+.nav-exit-btn:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 2px;
+}
+
+.nav-exit-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.nav-header-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.nav-control-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 18px;
+  min-width: 48px;
+  min-height: 48px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+}
+
+/* Focus indicator for control buttons */
+.nav-control-btn:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 2px;
+}
+
+.nav-control-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.nav-control-btn:active {
+  transform: translateY(0);
+}
+
+.nav-destination-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-destination-name {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.nav-eta {
+  font-size: 13px;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+/* Current step - large and prominent */
+.nav-current-step {
+  display: flex;
+  align-items: center;
+  padding: 24px 20px;
+  background: linear-gradient(180deg, #f9fafb 0%, #ffffff 100%);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.nav-instruction-icon {
+  font-size: 48px;
+  margin-right: 16px;
+  color: #3B82F6;
+  width: 60px;
+  text-align: center;
+}
+
+.nav-instruction-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-instruction-main {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1f2937;
+  line-height: 1.4;
+}
+
+.nav-instruction-distance {
+  font-size: 32px;
+  font-weight: 800;
+  color: #3B82F6;
+  letter-spacing: -0.5px;
+}
+
+/* Next step preview */
+.nav-next-step {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  background: #f3f4f6;
+  border-bottom: 1px solid #e5e7eb;
+  gap: 8px;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.nav-then-label {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: #6b7280;
+}
+
+.nav-next-icon {
+  font-size: 18px;
+  color: #6b7280;
+}
+
+.nav-next-text {
+  flex: 1;
+  font-weight: 500;
+}
+
+/* Progress bar */
+.nav-progress-container {
+  position: relative;
+  height: 40px;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.nav-progress-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #3B82F6 0%, #2563EB 100%);
+  transition: width 0.5s ease;
+}
+
+.nav-progress-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  font-weight: 600;
+  color: #4b5563;
+  z-index: 1;
+  background: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* Step controls for testing */
+.nav-step-controls {
+  display: flex;
+  gap: 8px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #fafafa;
+}
+
+.nav-step-btn {
+  flex: 1;
+  padding: 8px 16px;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-step-btn:hover:not(:disabled) {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.nav-step-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* All steps list */
+.nav-steps-list {
+  border-top: 2px solid #e5e7eb;
+}
+
+.nav-steps-summary {
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  background: #fafafa;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-steps-summary:hover {
+  background: #f3f4f6;
+}
+
+.nav-steps-summary::marker {
+  color: #3B82F6;
+}
+
+.nav-steps-scroll {
+  max-height: 300px;
+  overflow-y: auto;
+  background: white;
+}
+
+.nav-step-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 1px solid #f3f4f6;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.nav-step-item:hover {
+  background: #f9fafb;
+}
+
+.nav-step-item.active {
+  background: #eff6ff;
+  border-left: 4px solid #3B82F6;
+}
+
+.nav-step-number {
+  width: 28px;
+  height: 28px;
+  background: #e5e7eb;
+  color: #4b5563;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  margin-right: 12px;
+}
+
+.nav-step-item.active .nav-step-number {
+  background: #3B82F6;
+  color: white;
+}
+
+.nav-step-icon {
+  font-size: 20px;
+  margin-right: 12px;
+  color: #6b7280;
+  width: 24px;
+  text-align: center;
+}
+
+.nav-step-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-step-instruction {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.nav-step-meta {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Error state */
+.nav-error {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.nav-error p {
+  margin-bottom: 16px;
+  color: #6b7280;
+}
+
+/* Mobile responsive - INCREASE spacing and touch targets */
+@media (max-width: 768px) {
+  .navigation-panel {
+    max-height: 60vh;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 16px 16px 0 0;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    transform: none;
+  }
+
+  .nav-header {
+    border-radius: 16px 16px 0 0;
+  }
+
+  .navigation-panel.compact {
+    max-height: 180px;
+  }
+
+  .nav-header {
+    padding: 12px 16px; /* Maintain padding, was: 10px 12px */
+    min-height: 56px; /* Comfortable touch zone */
+  }
+
+  /* Touch targets maintained at 48x48px minimum (don't decrease) */
+  .nav-exit-btn {
+    min-width: 48px;
+    min-height: 48px;
+    font-size: 20px;
+  }
+
+  .nav-control-btn {
+    min-width: 48px;
+    min-height: 48px;
+    font-size: 18px;
+  }
+
+  .nav-destination-name {
+    font-size: 15px; /* Readable, was: 14px */
+  }
+
+  .nav-eta {
+    font-size: 13px; /* Readable, was: 12px */
+  }
+
+  .nav-current-step {
+    padding: 20px 16px; /* Increased vertical, was: 16px */
+    min-height: 120px;
+  }
+
+  .nav-instruction-icon {
+    font-size: 48px; /* Increased, was: 36px */
+    width: 56px; /* Increased, was: 48px */
+    margin-right: 16px; /* Increased, was: 12px */
+  }
+
+  .nav-instruction-main {
+    font-size: 18px; /* Increased for readability, was: 16px */
+  }
+
+  .nav-instruction-distance {
+    font-size: 28px; /* Increased prominence, was: 24px */
+  }
+
+  .nav-next-step {
+    padding: 12px 16px; /* Increased vertical, was: 10px 16px */
+    font-size: 14px; /* Increased, was: 13px */
+  }
+
+  .nav-step-controls {
+    padding: 12px 16px; /* Increased, was: 8px 12px */
+  }
+
+  .nav-steps-scroll {
+    max-height: 200px;
+  }
+
+  .nav-header-controls {
+    gap: 8px; /* Increased from 6px for better thumb separation */
+  }
+}
+
+/* Extra small mobile devices - maintain readability */
+@media (max-width: 480px) {
+  .navigation-panel {
+    max-height: 55vh; /* Increased from 45vh for more content */
+  }
+
+  .navigation-panel.compact {
+    max-height: 160px;
+  }
+
+  /* Maintain minimum readable sizes */
+  .nav-instruction-icon {
+    font-size: 40px; /* Increased from 32px for visibility */
+    width: 48px; /* Increased from 40px */
+  }
+
+  .nav-instruction-main {
+    font-size: 16px; /* Increased from 14px for readability */
+  }
+
+  .nav-instruction-distance {
+    font-size: 24px; /* Increased from 20px for prominence */
+  }
+
+  .nav-current-step {
+    padding: 16px; /* Maintain spacing */
+  }
+}
+
+/* Navigation Instructions integration */
+.nav-all-steps-container {
+  margin: 0;
+  padding: 0;
+}
+
+/* Override NavigationInstructions styles to fit navigation panel theme */
+.nav-all-steps-container .navigation-instructions {
+  margin: 0;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  border-radius: 0;
+}
+
+.nav-all-steps-container .instructions-header {
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.nav-all-steps-container .instructions-header:hover {
+  background-color: #f3f4f6;
+}
+
+.nav-all-steps-container .instructions-list {
+  max-height: 300px; /* Slightly smaller for navigation panel */
+}

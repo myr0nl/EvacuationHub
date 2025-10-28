@@ -1,0 +1,191 @@
+/**
+ * Mobile Filter FAB Styles
+ *
+ * Floating action button for opening filter bottom sheet on mobile devices.
+ * Hidden on desktop (> 768px) where sidebar is used instead.
+ */
+
+/* FAB Button */
+.mobile-filter-fab {
+  position: fixed;
+  bottom: 24px;
+  left: 16px;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+  border: none;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.4),
+              0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+
+  /* iOS safe area insets */
+  bottom: calc(24px + env(safe-area-inset-bottom));
+  left: calc(16px + env(safe-area-inset-left));
+}
+
+/* Hide FAB on desktop */
+@media (min-width: 769px) {
+  .mobile-filter-fab {
+    display: none !important;
+  }
+}
+
+/* FAB Icon */
+.fab-icon {
+  color: white;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* FAB Badge */
+.fab-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 6px;
+  background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+  color: white;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.5),
+              0 0 0 2px white;
+  border: 2px solid white;
+  animation: badge-pop 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Badge pop animation */
+@keyframes badge-pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Hover state (for devices with hover capability) */
+@media (hover: hover) and (pointer: fine) {
+  .mobile-filter-fab:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 16px rgba(30, 64, 175, 0.5),
+                0 3px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  .mobile-filter-fab:hover .fab-icon {
+    transform: rotate(15deg);
+  }
+}
+
+/* Active/pressed state */
+.mobile-filter-fab:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 6px rgba(30, 64, 175, 0.3),
+              0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* When bottom sheet is open */
+.mobile-filter-fab.active {
+  background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+  box-shadow: 0 2px 6px rgba(30, 64, 175, 0.3),
+              0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-filter-fab.active .fab-icon {
+  transform: rotate(180deg);
+}
+
+/* Focus visible state for keyboard navigation */
+.mobile-filter-fab:focus-visible {
+  outline: 3px solid #1e40af;
+  outline-offset: 4px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .mobile-filter-fab {
+    border: 2px solid #0f172a;
+  }
+
+  .fab-badge {
+    border-width: 3px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-filter-fab,
+  .fab-icon,
+  .fab-badge {
+    transition: none;
+    animation: none;
+  }
+
+  .mobile-filter-fab:hover {
+    transform: none;
+  }
+
+  .mobile-filter-fab:hover .fab-icon {
+    transform: none;
+  }
+
+  .mobile-filter-fab.active .fab-icon {
+    transform: none;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .mobile-filter-fab {
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.6),
+                0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .fab-badge {
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.7),
+                0 0 0 2px #1f2937;
+    border-color: #1f2937;
+  }
+}
+
+/* Small mobile devices (<= 360px) */
+@media (max-width: 360px) {
+  .mobile-filter-fab {
+    width: 52px;
+    height: 52px;
+    bottom: 20px;
+    left: 12px;
+    bottom: calc(20px + env(safe-area-inset-bottom));
+    left: calc(12px + env(safe-area-inset-left));
+  }
+
+  .fab-icon {
+    font-size: 24px;
+  }
+
+  .fab-badge {
+    min-width: 20px;
+    height: 20px;
+    font-size: 11px;
+    top: -3px;
+    right: -3px;
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "name": "DisasterScope",
+  "short_name": "DisasterScope",
+  "description": "Track disasters in real-time. Navigate to safety. 8 trusted data sources with proximity alerts and safe routing.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e40af",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["news", "utilities", "weather"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "View Map",
+      "short_name": "Map",
+      "description": "Open disaster map view",
+      "url": "/",
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false
+}

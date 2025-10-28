@@ -1,0 +1,338 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import design tokens, utilities, and unified button system */
+@import './styles/design-tokens.css';
+@import './styles/utilities.css';
+@import './styles/buttons.css';
+
+/* CSS Variables for consistent theming - 2025 Enhanced Palette */
+:root {
+  /* Enhanced disaster severity colors */
+  --color-critical: #ef4444;        /* Red 500 - Softer but urgent */
+  --color-critical-light: #fca5a5;  /* Red 300 - For glows */
+  --color-critical-dark: #b91c1c;   /* Red 700 - For dark mode */
+  --color-warning: #f97316;         /* Orange 500 - More vibrant */
+  --color-warning-light: #fdba74;   /* Orange 300 - For glows */
+  --color-warning-dark: #c2410c;    /* Orange 700 - For dark mode */
+  --color-caution: #fbbf24;         /* Amber 400 - Warmer tone */
+  --color-caution-light: #fcd34d;   /* Amber 300 - For glows */
+  --color-caution-dark: #d97706;    /* Amber 600 - For dark mode */
+  --color-success: #22c55e;         /* Green 500 - Vibrant safe signal */
+  --color-success-light: #86efac;   /* Green 300 - For glows */
+  --color-success-dark: #15803d;    /* Green 700 - For dark mode */
+  --color-info: #14b8a6;            /* Teal 500 - Calming ocean/nature vibe */
+  --color-info-light: #5eead4;      /* Teal 300 - For glows */
+  --color-info-dark: #0f766e;       /* Teal 700 - For dark mode */
+  /* Emergency Response Pro brand colors - Professional Blue/Orange theme */
+  --color-primary: #1e40af;         /* Deep Blue - Professional authority */
+  --color-primary-light: #93c5fd;   /* Light Blue - For glows */
+  --color-primary-dark: #1e293b;    /* Slate - For dark mode */
+  --color-secondary: #1e40af;       /* Deep Blue - Professional confident */
+  --color-secondary-light: #93c5fd; /* Light Blue - For glows */
+  --color-secondary-dark: #1e3a8a;  /* Navy Blue - For dark mode */
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  /* Border radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+  /* Transitions */
+  --transition-fast: 150ms;
+  --transition-base: 200ms;
+  --transition-slow: 300ms;
+  --transition-slower: 400ms;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  background: linear-gradient(to bottom, #f9fafb 0%, #e5e7eb 100%);
+  min-height: 100vh;
+}
+
+/* Typography improvements with Atkinson Hyperlegible */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+button {
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-weight: 700;
+}
+
+strong, b {
+  font-weight: 600;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* ACCESSIBILITY & SCREEN RECORDING FIX: Disable animations for reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Manual reduced motion toggle (controlled via settings) */
+/* AGGRESSIVE MODE: Disables animations, transitions, hover effects, and expensive visual effects */
+.reduced-motion *,
+.reduced-motion *::before,
+.reduced-motion *::after {
+  animation: none !important;
+  animation-duration: 0ms !important;
+  animation-iteration-count: 1 !important;
+  transition: none !important;
+  transition-duration: 0ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Disable hover transforms and scale effects during reduced motion */
+.reduced-motion *:hover {
+  transform: none !important;
+  scale: 1 !important;
+}
+
+/* Disable backdrop filters (expensive for low FPS recording) */
+.reduced-motion * {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Prevent opacity flicker on hover */
+.reduced-motion *:hover {
+  opacity: 1 !important;
+}
+
+/* Glassmorphism utility classes */
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .glass-dark {
+    background: rgba(17, 24, 39, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: var(--shadow-glass);
+  }
+
+  .glass-card-dark {
+    background: rgba(31, 41, 55, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-glass);
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    transition: transform var(--transition-base) ease, box-shadow var(--transition-base) ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .hover-scale {
+    transition: transform var(--transition-base) ease;
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+
+  .hover-glow-critical:hover {
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+  }
+
+  .hover-glow-warning:hover {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+  }
+
+  .hover-glow-success:hover {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+  }
+
+  .hover-glow-info:hover {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Pulse animations for critical markers */
+  .pulse-critical {
+    animation: pulseCritical 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulseCritical {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+    }
+    50% {
+      opacity: 0.9;
+      box-shadow: 0 0 0 10px rgba(220, 38, 38, 0);
+    }
+  }
+
+  .pulse-warning {
+    animation: pulseWarning 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulseWarning {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+    }
+    50% {
+      opacity: 0.9;
+      box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
+    }
+  }
+
+  /* Shimmer effect for loading */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(243, 244, 246, 0.5);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-secondary-dark) 100%);
+}
+
+/* Accessibility: Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .glass,
+  .glass-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid #000;
+  }
+
+  .glass-dark,
+  .glass-card-dark {
+    background: rgba(17, 24, 39, 0.95);
+    border: 2px solid #fff;
+  }
+}
+
+/* Focus visible for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white;
+  }
+
+  .glass,
+  .glass-dark,
+  .glass-card,
+  .glass-card-dark {
+    background: white;
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+}

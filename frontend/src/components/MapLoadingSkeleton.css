@@ -1,0 +1,292 @@
+/* Map Loading Skeleton Styles */
+
+.map-loading-skeleton {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 50%, #e5e7eb 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Animated gradient background */
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Map background pattern */
+.skeleton-map-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.5;
+}
+
+/* Pulsing overlay */
+.skeleton-pulse-overlay {
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 70%
+  );
+  animation: pulseMove 6s ease-in-out infinite;
+}
+
+@keyframes pulseMove {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(20px, 20px) scale(1.1);
+    opacity: 0.5;
+  }
+}
+
+/* Skeleton markers container */
+.skeleton-markers-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Individual skeleton marker */
+.skeleton-marker {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(30, 64, 175, 0.4) 0%,
+    rgba(30, 64, 175, 0.5) 50%,
+    rgba(30, 64, 175, 0.4) 100%
+  );
+  background-size: 200% 200%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    0 0 0 8px rgba(30, 64, 175, 0.1);
+  animation:
+    markerPulse 2s ease-in-out infinite,
+    markerFloat 4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes markerPulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes markerFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Loading text section */
+.skeleton-loading-text {
+  position: relative;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem 3rem;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.5);
+  max-width: 500px;
+  text-align: center;
+}
+
+/* Shimmer effect */
+.shimmer-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    transparent 100%
+  );
+  animation: shimmerSlide 2.5s ease-in-out infinite;
+}
+
+@keyframes shimmerSlide {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
+/* Loading content */
+.loading-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loading-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3b82f6;
+}
+
+.loading-globe {
+  animation: iconSpin 3s linear infinite;
+}
+
+@keyframes iconSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-message {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.loading-primary {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  letter-spacing: -0.025em;
+}
+
+.loading-secondary {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+/* Skeleton zoom controls */
+.skeleton-zoom-controls {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-zoom-button {
+  width: 34px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 4px;
+  animation: buttonPulse 2s ease-in-out infinite;
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .skeleton-loading-text {
+    padding: 1.5rem 2rem;
+    max-width: 90%;
+  }
+
+  .loading-primary {
+    font-size: 1.125rem;
+  }
+
+  .loading-secondary {
+    font-size: 0.8125rem;
+  }
+
+  .loading-globe {
+    width: 40px;
+    height: 40px;
+  }
+
+  .skeleton-marker {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .skeleton-loading-text {
+    padding: 1rem 1.5rem;
+  }
+
+  .loading-primary {
+    font-size: 1rem;
+  }
+
+  .loading-secondary {
+    font-size: 0.75rem;
+  }
+
+  .loading-globe {
+    width: 32px;
+    height: 32px;
+  }
+
+  .skeleton-marker {
+    width: 24px;
+    height: 24px;
+  }
+}

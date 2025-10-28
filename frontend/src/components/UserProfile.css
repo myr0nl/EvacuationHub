@@ -1,0 +1,342 @@
+.profile-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e40af15 0%, #1e3a8a15 100%);
+  padding: 2rem;
+}
+
+.profile-header {
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.back-button {
+  background: white;
+  border: 2px solid #1e40af;
+  color: #1e40af;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background: #1e40af;
+  color: white;
+  transform: translateX(-2px);
+}
+
+.profile-header h1 {
+  font-size: 2rem;
+  color: #333;
+  margin: 0;
+}
+
+.profile-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.profile-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(229, 231, 235, 0.8);
+  border-radius: 20px;
+  padding: 2.25rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.profile-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  border-color: rgba(30, 64, 175, 0.4);
+}
+
+.profile-card h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-size: 1.3rem;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0 auto 1rem;
+}
+
+.profile-info {
+  text-align: center;
+}
+
+.profile-info h2 {
+  margin: 0.5rem 0;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.profile-email {
+  color: #777;
+  font-size: 0.95rem;
+}
+
+.credibility-stats-card {
+  grid-column: 1 / -1;
+}
+
+.credibility-stats-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.credibility-section,
+.statistics-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.credibility-section h3,
+.statistics-section h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  color: #1e40af;
+  border-bottom: 2px solid rgba(30, 64, 175, 0.2);
+  padding-bottom: 0.5rem;
+}
+
+.credibility-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.credibility-progress-circle {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.credibility-score-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.score-number {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #333;
+  line-height: 1;
+}
+
+.score-label {
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: 0.25rem;
+}
+
+.credibility-level-display {
+  display: flex;
+  justify-content: center;
+}
+
+.credibility-explanation {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #1e40af;
+}
+
+.credibility-explanation p {
+  margin: 0;
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, rgba(30, 64, 175, 0.12) 0%, rgba(118, 75, 162, 0.12) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(30, 64, 175, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.08);
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(30, 64, 175, 0.15);
+  border-color: rgba(30, 64, 175, 0.4);
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1e40af;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.profile-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+}
+
+.logout-button {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  color: white;
+  border: none;
+  padding: 0.85rem 2.25rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.3px;
+}
+
+.logout-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.logout-button:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.logout-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(231, 76, 60, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.logout-button:active:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
+}
+
+.logout-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+  box-shadow: none;
+}
+
+.logout-button:disabled::before {
+  display: none;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 1rem;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profile-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .profile-card {
+    padding: 1.5rem;
+  }
+
+  .credibility-stats-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .credibility-progress-circle {
+    width: 160px;
+    height: 160px;
+  }
+
+  .credibility-progress-circle svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .credibility-score-text {
+    /* Ensure text stays centered even with smaller circle */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+  }
+
+  .score-number {
+    font-size: 2.5rem;
+  }
+
+  .score-label {
+    font-size: 0.75rem;
+  }
+}
