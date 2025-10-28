@@ -1,0 +1,116 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+
+    "users": {
+      "$user_id": {
+        ".read": "auth != null && auth.uid == $user_id",
+        ".write": "auth != null && auth.uid == $user_id",
+
+        "email": {
+          ".validate": "newData.isString() && newData.val().matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$/i)"
+        },
+        "display_name": {
+          ".validate": "newData.isString() && newData.val().length <= 50"
+        },
+        "credibility_score": {
+          ".write": false,
+          ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100"
+        },
+        "credibility_level": {
+          ".write": false,
+          ".validate": "newData.isString() && (newData.val() == 'Expert' || newData.val() == 'Veteran' || newData.val() == 'Trusted' || newData.val() == 'Neutral' || newData.val() == 'Caution' || newData.val() == 'Unreliable')"
+        },
+        "total_reports": {
+          ".write": false,
+          ".validate": "newData.isNumber() && newData.val() >= 0"
+        },
+        "successful_reports": {
+          ".write": false,
+          ".validate": "newData.isNumber() && newData.val() >= 0"
+        },
+        "flagged_reports": {
+          ".write": false,
+          ".validate": "newData.isNumber() && newData.val() >= 0"
+        }
+      }
+    },
+
+    "user_reports": {
+      "$user_id": {
+        ".read": "auth != null && auth.uid == $user_id",
+        ".write": false,
+
+        "reports": {
+          "$report_id": {
+            ".write": "auth != null && auth.uid == $user_id"
+          }
+        }
+      }
+    },
+
+    "reports": {
+      ".read": "auth != null",
+      "$report_id": {
+        ".write": "auth != null || !newData.child('user_id').exists()",
+        ".validate": "newData.hasChildren(['latitude', 'longitude', 'type', 'timestamp'])",
+
+        "user_id": {
+          ".validate": "!data.exists() || data.val() == newData.val()"
+        }
+      }
+    },
+
+    "public_data_cache": {
+      ".read": true,
+      ".write": false
+    },
+
+    "geocoding_cache": {
+      ".read": true,
+      ".write": false
+    },
+
+    "ai_usage_tracking": {
+      ".read": false,
+      ".write": false
+    },
+
+    "ai_analysis_cache": {
+      ".read": false,
+      ".write": false
+    },
+
+    "user_alert_preferences": {
+      "$user_id": {
+        ".read": "auth != null && auth.uid == $user_id",
+        ".write": "auth != null && auth.uid == $user_id"
+      }
+    },
+
+    "user_map_settings": {
+      "$user_id": {
+        ".read": "auth != null && auth.uid == $user_id",
+        ".write": "auth != null && auth.uid == $user_id"
+      }
+    },
+
+    "user_notifications": {
+      "$user_id": {
+        ".read": "auth != null && auth.uid == $user_id",
+        ".write": "auth != null && auth.uid == $user_id"
+      }
+    },
+
+    "admin_users": {
+      ".read": false,
+      ".write": false
+    },
+
+    "audit_logs": {
+      ".read": false,
+      ".write": false
+    }
+  }
+}

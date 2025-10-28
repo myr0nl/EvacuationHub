@@ -1,0 +1,16 @@
+Flask==3.0.0
+Flask-CORS==4.0.0
+Flask-Limiter==3.5.0
+firebase-admin==6.3.0
+python-dotenv==1.0.0
+gunicorn==21.2.0
+requests==2.31.0
+openai==1.57.4
+google-genai==0.2.2
+feedparser==6.0.11
+PyJWT==2.8.0
+bleach==6.1.0
+shapely==2.0.6
+geopy==2.3.0
+flexpolyline==0.1.0
+polyline==2.0.0
