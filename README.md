@@ -28,7 +28,7 @@ A real-time disaster tracking and navigation platform combining crowdsourced rep
 - [Architecture](#architecture)
 - [Data Sources](#data-sources)
 - [Technology Stack](#technology-stack)
-- [Screenshots](#screenshots)
+- [UI](#ui)
 - [API Documentation](#api-documentation)
 - [Development](#development)
 - [Testing](#testing)
@@ -349,7 +349,7 @@ DisasterScope integrates **8 official data sources** for comprehensive disaster 
 
 ---
 
-## Screenshots
+## UI
 
 ### Interactive Disaster Map
 The main interface displays disasters from all sources with color-coded markers:
