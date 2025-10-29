@@ -7,6 +7,8 @@
 ![React](https://img.shields.io/badge/react-19.2.0-blue.svg)
 ![Flask](https://img.shields.io/badge/flask-3.0.0-blue.svg)
 
+**AI was used to generate documentation, cleanup code, and write comments in the code.**
+
 **See the full scope of disasters. Navigate to safety.**
 
 A real-time disaster tracking and navigation platform combining crowdsourced reports with 8 trusted official data sources to help users monitor, assess, and evacuate during emergencies.
