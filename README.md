@@ -23,7 +23,6 @@ A real-time disaster tracking and navigation platform combining crowdsourced rep
 
 - [Overview](#overview)
 - [Key Features](#key-features)
-- [Live Demo](#live-demo)
 - [Quick Start](#quick-start)
 - [Architecture](#architecture)
 - [Data Sources](#data-sources)
@@ -90,14 +89,6 @@ A real-time disaster tracking and navigation platform combining crowdsourced rep
 - **Rate Limiting**: Emergency-optimized thresholds (600/hr proximity, 100/day reports)
 - **Auto-Cleanup**: Removes expired alerts and old wildfire data
 - **Deduplication**: Prevents duplicate entries across all sources
-
----
-
-## Live Demo
-
-**Coming Soon**: Deployment information will be added here.
-
-For now, follow the [Quick Start](#quick-start) guide to run locally.
 
 ---
 
