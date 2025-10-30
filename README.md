@@ -13,7 +13,7 @@
 
 A real-time disaster tracking and navigation platform combining crowdsourced reports with 8 trusted official data sources to help users monitor, assess, and evacuate during emergencies.
 
-[Live Demo](https://ds.myrondomain.com)
+[APP LINK](https://ds.myrondomain.com)
 
 </div>
 
